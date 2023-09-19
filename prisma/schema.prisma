@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BiddingType {
+  id              String          @id @default(uuid())
+  name            String          @unique
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  contract          Contract[]
+
+   @@map("bidding_types")
+}
+
+model Supplier {
+  id                String         @id @default(uuid())
+  name              String
+  corporateName     String
+  cnpj              String          @unique
+  zipcode           String
+  city              String
+  neighborhood      String
+  address           String
+  number            Int
+  observation       String          @default("")
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  contract          Contract[]
+
+   @@map("suppliers")
+}
+
+model Contract {
+  id                String          @id @default(uuid())
+  number            String
+  processNumber     String
+  biddingTypeId     String
+  biddingType       BiddingType     @relation(fields: [biddingTypeId], references: [id])
+  supplierId        String
+  supplier          Supplier        @relation(fields: [supplierId], references: [id])
+  value             Decimal
+  fixture           String
+  dueDate           DateTime
+  subscriptionDate  DateTime
+  billingDeadline   String
+  endContract       Boolean  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  amendment         Amendment[]
+
+  @@index([number, processNumber, supplierId], name: "unique_contract")
+  @@index([biddingTypeId])
+  @@index([supplierId])
+  @@map("contracts")
+}
+
+model Amendment {
+  id                String          @id @default(uuid())
+  contractId        String
+  contract          Contract        @relation(fields: [contractId], references: [id])
+  number            Int
+  dueDate           DateTime
+  subscriptionDate  DateTime
+  value             Decimal
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([number, contractId], name: "unique_contract_amendment")
+  @@index([contractId])
+
+  @@map("amendments")
+}

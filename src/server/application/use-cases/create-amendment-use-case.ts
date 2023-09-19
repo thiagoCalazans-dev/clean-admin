@@ -5,7 +5,7 @@ import { CreateAmendmentDTO } from "../dto/amendment-dto";
 import { AmendmentRepository } from "../repository/amendment";
 import { BiddingTypeRepository } from "../repository/bidding-type";
 import { SupplierRepository } from "../repository/supplier";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 import { ContractRepository } from "../repository/contract";
 
 export class CreateAmendmentUseCase {
@@ -22,7 +22,7 @@ export class CreateAmendmentUseCase {
     );
 
     if (!contractExists) {
-      throw new ResourceNotfoundError("Contract");
+      throw new ResourceNotFoundError("Contract");
     }
 
     const AmendmentWithSameNumberAndContract =

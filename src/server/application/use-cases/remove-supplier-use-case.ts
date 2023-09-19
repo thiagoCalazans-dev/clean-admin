@@ -1,5 +1,5 @@
 import { SupplierRepository } from "../repository/supplier";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 export class RemoveSuppliersUseCase {
   constructor(private supplierRepository: SupplierRepository) {}
@@ -7,7 +7,7 @@ export class RemoveSuppliersUseCase {
     const supplier = await this.supplierRepository.findById(id);
 
     if (!supplier) {
-      throw new ResourceNotfoundError("Supplier");
+      throw new ResourceNotFoundError("Supplier");
     }
 
     await this.supplierRepository.remove(id);

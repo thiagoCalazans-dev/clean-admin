@@ -5,7 +5,7 @@ import { CreateContractDTO } from "../dto/contract-dto";
 import { ContractRepository } from "../repository/contract";
 import { BiddingTypeRepository } from "../repository/bidding-type";
 import { SupplierRepository } from "../repository/supplier";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 export class CreateContractUseCase {
   constructor(
@@ -22,7 +22,7 @@ export class CreateContractUseCase {
     );
 
     if (!biddingTypeExists) {
-      throw new ResourceNotfoundError("Bidding type");
+      throw new ResourceNotFoundError("Bidding type");
     }
 
     const supplierExists = await this.supplierRepository.findById(
@@ -30,7 +30,7 @@ export class CreateContractUseCase {
     );
 
     if (!supplierExists) {
-      throw new ResourceNotfoundError("Supplier");
+      throw new ResourceNotFoundError("Supplier");
     }
 
     const ContractWithSameSupplierNumberAndProcessExists =

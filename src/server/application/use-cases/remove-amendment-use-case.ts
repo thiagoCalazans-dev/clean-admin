@@ -1,5 +1,5 @@
 import { AmendmentRepository } from "../repository/amendment";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 export class RemoveAmendmentsUseCase {
   constructor(private amendmentRepository: AmendmentRepository) {}
@@ -7,7 +7,7 @@ export class RemoveAmendmentsUseCase {
     const amendment = await this.amendmentRepository.findById(id);
 
     if (!amendment) {
-      throw new ResourceNotfoundError("Amendment");
+      throw new ResourceNotFoundError("Amendment");
     }
 
     await this.amendmentRepository.remove(id);
