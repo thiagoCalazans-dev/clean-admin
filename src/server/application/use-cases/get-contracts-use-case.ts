@@ -4,7 +4,12 @@ export class GetContractsUseCase {
   constructor(private contractRepository: ContractRepository) {}
 
   async execute() {
-    const suppliers = await this.contractRepository.findMany();
-    return suppliers;
+    const contracts = await this.contractRepository.findMany();
+
+    const output = {
+      data: contracts,
+    };
+
+    return output;
   }
 }
