@@ -75,12 +75,7 @@ export class BiddingTypeController {
           statusText: error.message,
         });
       }
-      if (error instanceof ResourceAlreadyExistError) {
-        return NextResponse.json(null, {
-          status: error.status,
-          statusText: error.message,
-        });
-      }
+
       console.error(error);
       return NextResponse.json(null, {
         status: 500,
