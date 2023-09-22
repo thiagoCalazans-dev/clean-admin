@@ -1,4 +1,4 @@
-import { BiddingType } from "@/client/schema/bidding-type";
+import { Supplier } from "@/client/schema/supplier";
 import {
   Table,
   TableHead,
@@ -7,19 +7,21 @@ import {
   TableBody,
   TableCell,
 } from "../ui/table";
-import { DeleteButton } from "../buttons/delete-bidding-type-button";
+import { DeleteButton } from "../buttons/delete-supplier-button";
 
-interface BiddingTypeProps {
-  data: BiddingType[];
+
+interface SupplierProps {
+  data: Supplier[];
 }
 
-export function BiddingTypeTable({ data }: BiddingTypeProps) {
+export function SupplierTable({ data }: SupplierProps) {
   return (
     <div className="rounded-md border">
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
+            <TableHead>CNPJ</TableHead>
             <TableHead className="flex justify-end items-center">
               Action
             </TableHead>
@@ -30,6 +32,7 @@ export function BiddingTypeTable({ data }: BiddingTypeProps) {
             return (
               <TableRow key={item.id}>
                 <TableCell>{item.name}</TableCell>
+                <TableCell>{item.cnpj}</TableCell>
                 <TableCell className="flex justify-end items-center">
                   <DeleteButton name={item.name} id={item.id} />
                 </TableCell>

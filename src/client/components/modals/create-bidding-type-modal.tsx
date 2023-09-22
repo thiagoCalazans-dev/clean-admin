@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Modal } from "@/client/components/ui/modal";
 import { Button } from "@/client/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { BiddingTypeForm } from "../form/bidding-type-form";
+import { BiddingTypeForm } from "../forms/bidding-type-form";
 
 export function CreateBiddingTypeModal() {
   const [modalState, setModalState] = useState(false);

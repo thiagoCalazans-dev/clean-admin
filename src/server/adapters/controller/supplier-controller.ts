@@ -11,12 +11,19 @@ import { NextResponse } from "next/server";
 export class SupplierController {
   constructor() {}
   static async POST(request: Request) {
-    const body: CreateSupplierDTO = await request.json();
+    const {data} = await request.json();
+
+    const supplier: CreateSupplierDTO = {
+      data: {
+        ...data,
+        number: parseInt(data.number),
+      },
+    };
 
     try {
       const supplierUseCase = makeCreateSupplierUseCase();
 
-      await supplierUseCase.execute(body);
+      await supplierUseCase.execute(supplier);
 
       revalidateTag("suppliers");
 

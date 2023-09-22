@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/client/components/ui/button";
-import { AlertModal } from "@/client/components/modal/alert-modal";
+import { AlertModal } from "@/client/components/modals/alert-modal";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useResponseValidationToast } from "../../hooks/use-response-validation-toast";
-import { BiddingTypeActions } from "../../actions/bidding-type-actions";
+import { SupplierActions } from "../../actions/supplier-actions";
 
 interface DeleteButtonProps {
   id: string;
@@ -22,7 +22,7 @@ export function DeleteButton({ name, id }: DeleteButtonProps) {
   const onDeleteConfirm = async () => {
     try {
       setLoading(true);
-      await await BiddingTypeActions.REMOVE(id);
+      await await SupplierActions.REMOVE(id);
       onSuccess(`${name} deleted!`);
       router.refresh();
     } catch (error: Error | any) {

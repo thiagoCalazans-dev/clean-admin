@@ -9,6 +9,7 @@ export function useResponseValidationToast() {
     toast({
       title,
       description: new Date().toDateString(),
+      color: "red",
     });
   }
 
@@ -16,6 +17,7 @@ export function useResponseValidationToast() {
     toast({
       title: "Error",
       description: message,
+      color: "red"
     });
   }
 

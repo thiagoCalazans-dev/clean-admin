@@ -7,8 +7,6 @@ export class CreateSupplier {
   constructor(private supplierRepository: SupplierRepository) {}
 
   async execute({ data }: CreateSupplierDTO) {
-  console.log(data);
-
     const supplier = Supplier.create(data);
 
     const supplierWithSameCNPJ = await this.supplierRepository.findByCNPJ(

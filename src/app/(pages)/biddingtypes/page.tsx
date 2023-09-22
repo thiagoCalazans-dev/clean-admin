@@ -1,9 +1,8 @@
 import { BiddingTypeActions } from "@/client/actions/bidding-type-actions";
-import { CreateBiddingTypeModal } from "@/client/components/modal/create-bidding-type-modal";
+import { CreateBiddingTypeModal } from "@/client/components/modals/create-bidding-type-modal";
 import { BiddingTypeTable } from "@/client/components/tables/bidding-type-table";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
-
 
 export default async function BiddingTypes() {
   const { data } = await BiddingTypeActions.GET();

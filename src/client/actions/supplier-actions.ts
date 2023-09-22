@@ -1,14 +1,11 @@
 import { BASE_URL } from "@/client/lib/utils";
-import {
-  CreateBiddingType,
-  GetBiddingTypeActionOutput,
-} from "../schema/bidding-type";
+import { CreateSupplier, GetSupplierActionOutput } from "../schema/supplier";
 
-export class BiddingTypeActions {
+export class SupplierActions {
   static async GET() {
-    const response = await fetch(`${BASE_URL}/biddingTypes`, {
+    const response = await fetch(`${BASE_URL}/suppliers`, {
       next: {
-        tags: ["biddingTypes"],
+        tags: ["suppliers"],
       },
     });
 
@@ -16,12 +13,12 @@ export class BiddingTypeActions {
       throw new Error(response.statusText);
     }
 
-    const json: GetBiddingTypeActionOutput = await response.json();
+    const json: GetSupplierActionOutput = await response.json();
     return json;
   }
 
-  static async REMOVE(biddingTypeId: string) {
-    const response = await fetch(`${BASE_URL}/biddingTypes/${biddingTypeId}`, {
+  static async REMOVE(supplierId: string) {
+    const response = await fetch(`${BASE_URL}/suppliers/${supplierId}`, {
       method: "DELETE",
     });
 
@@ -33,12 +30,14 @@ export class BiddingTypeActions {
     return json || null;
   }
 
-  static async CREATE(biddingType: CreateBiddingType) {
+  static async CREATE(supplier: CreateSupplier) {
     const body = {
-      data: biddingType,
+      data: {
+        supplier,
+      },
     };
 
-    const response = await fetch(`${BASE_URL}/biddingTypes`, {
+    const response = await fetch(`${BASE_URL}/suppliers`, {
       method: "POST",
       body: JSON.stringify(body),
     });

@@ -1,4 +1,4 @@
-import { schema } from "@/lib/zod";
+import { schema } from "@/client/lib/zod";
 
 export const FormBiddingTypeSchema = schema.object({
   name: schema.string().min(3),
