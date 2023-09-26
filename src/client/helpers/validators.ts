@@ -82,3 +82,13 @@ export const normalizeZipCode = (value: String | undefined) => {
     .replace(/^(\d{5})(\d{3})+?$/, "$1-$2")
     .replace(/(-\d{3})(\d+?)/, "$1");
 };
+
+export function formatNumbersToCnpjMask(cnpj: string) {
+  const has14characteres = cnpj.padStart(14, "0");
+  if (!has14characteres) throw new Error("nao tem 14 caracteres");
+
+  return `${cnpj.slice(0, 2)}.${cnpj.slice(2, 5)}.${cnpj.slice(
+    5,
+    8
+  )}/${cnpj.slice(8, 12)}-${cnpj.slice(12)}`;
+}

@@ -1,5 +1,5 @@
 import { BiddingTypeActions } from "@/client/actions/bidding-type-actions";
-import { ContractsActions } from "@/client/actions/contract-actions";
+import { ContractActions } from "@/client/actions/contract-actions";
 import { SupplierActions } from "@/client/actions/supplier-actions";
 import { CreateContractModal } from "@/client/components/modals/create-contract-modal";
 import { ContractTable } from "@/client/components/tables/contract-table";
@@ -7,8 +7,8 @@ import { Heading } from "@/client/components/ui/heading";
 
 import { Separator } from "@/client/components/ui/separator";
 
-export default async function Contractss() {
-  const { data } = await ContractsActions.GET();
+export default async function Contracts() {
+  const { data } = await ContractActions.GET();
   const { data: biddingTypes } = await BiddingTypeActions.GET();
   const { data: suppliers } = await SupplierActions.GET();
 

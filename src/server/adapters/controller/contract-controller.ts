@@ -3,6 +3,7 @@ import { makeCreateContractUseCase } from "@/server/application/factories/makeCr
 import { makeFetchContractsUseCase } from "@/server/application/factories/makeFetchContractUseCase";
 import { makeGetContractsUseCase } from "@/server/application/factories/makeGetContractsUseCase";
 import { makeRemoveContractsUseCase } from "@/server/application/factories/makeRemoveContractUseCase";
+import { RequiredError } from "@/server/errors/RequiredError";
 
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
 import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
@@ -30,6 +31,12 @@ export class ContractController {
         });
 
       if (error instanceof ResourceNotFoundError)
+        return NextResponse.json(null, {
+          status: error.status,
+          statusText: error.message,
+        });
+
+      if (error instanceof RequiredError)
         return NextResponse.json(null, {
           status: error.status,
           statusText: error.message,

@@ -2,6 +2,7 @@ import { CreateBiddingTypeDTO } from "@/server/application/dto/bidding-type-dto"
 import { makeCreateBiddingTypeUseCase } from "@/server/application/factories/makeCreateBiddingTypeUseCase";
 import { makeGetBiddingTypesUseCase } from "@/server/application/factories/makeGetBiddingTypesUseCase";
 import { makeRemoveBiddingTypesUseCase } from "@/server/application/factories/makeRemoveBiddingTypeUseCase";
+import { RequiredError } from "@/server/errors/RequiredError";
 
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
 import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
@@ -75,6 +76,12 @@ export class BiddingTypeController {
           statusText: error.message,
         });
       }
+
+           if (error instanceof RequiredError)
+             return NextResponse.json(null, {
+               status: error.status,
+               statusText: error.message,
+             });
 
       console.error(error);
       return NextResponse.json(null, {

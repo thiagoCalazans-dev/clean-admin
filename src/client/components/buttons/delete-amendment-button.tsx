@@ -6,14 +6,17 @@ import { Button } from "@/client/components/ui/button";
 import { AlertModal } from "@/client/components/modals/alert-modal";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useResponseValidationToast } from "../../hooks/use-response-validation-toast";
-import { SupplierActions } from "../../actions/supplier-actions";
+import { AmendmentActions } from "@/client/actions/amendment-actions";
 
 interface DeleteButtonProps {
-  id: string;
+  params: {
+    contractId: string;
+    amendmentId: string;
+  };
   name: string;
 }
 
-export function DeleteSupplierButton({ name, id }: DeleteButtonProps) {
+export function DeleteAmendmentButton({ name, params }: DeleteButtonProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,7 +25,7 @@ export function DeleteSupplierButton({ name, id }: DeleteButtonProps) {
   const onDeleteConfirm = async () => {
     try {
       setLoading(true);
-      await await SupplierActions.REMOVE(id);
+      await AmendmentActions.REMOVE(params);
       onSuccess(`${name} deleted!`);
       router.refresh();
     } catch (error: Error | any) {

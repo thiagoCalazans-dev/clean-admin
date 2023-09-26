@@ -34,7 +34,6 @@ export class AmendmentController {
     }
   }
 
-
   static async DELETE(
     request: Request,
     params: {
@@ -52,12 +51,7 @@ export class AmendmentController {
         statusText: "Amendment removed",
       });
     } catch (error) {
-      if (error instanceof ResourceNotFoundError) {
-        return NextResponse.json(null, {
-          status: error.status,
-          statusText: error.message,
-        });
-      }
+  
 
       console.error(error);
       return NextResponse.json(null, {

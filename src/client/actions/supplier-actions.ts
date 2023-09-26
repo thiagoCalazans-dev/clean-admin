@@ -1,9 +1,13 @@
-import { BASE_URL } from "@/client/lib/utils";
-import { CreateSupplier, GetSupplierActionOutput } from "../schema/supplier";
+import {
+  CreateSupplier,
+  GetSupplierActionOutput,
+  GetSupplierSchemaActionOutput,
+} from "../schema/supplier";
+import { env } from "../helpers/env";
 
 export class SupplierActions {
   static async GET() {
-    const response = await fetch(`${BASE_URL}/suppliers`, {
+    const response = await fetch(`${env.API_BASE_URL}/suppliers`, {
       next: {
         tags: ["suppliers"],
       },
@@ -14,13 +18,23 @@ export class SupplierActions {
     }
 
     const json: GetSupplierActionOutput = await response.json();
-    return json;
+
+    const supplier = GetSupplierSchemaActionOutput.safeParse(json);
+
+    if (!supplier.success) {
+      throw new Error(supplier.error.message);
+    }
+
+    return supplier.data;
   }
 
   static async REMOVE(supplierId: string) {
-    const response = await fetch(`${BASE_URL}/suppliers/${supplierId}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${env.API_BASE_URL}/suppliers/${supplierId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) {
       throw new Error(response.statusText);
@@ -32,12 +46,10 @@ export class SupplierActions {
 
   static async CREATE(supplier: CreateSupplier) {
     const body = {
-      data: {
-        supplier,
-      },
+      data: supplier,
     };
 
-    const response = await fetch(`${BASE_URL}/suppliers`, {
+    const response = await fetch(`${env.API_BASE_URL}/suppliers`, {
       method: "POST",
       body: JSON.stringify(body),
     });

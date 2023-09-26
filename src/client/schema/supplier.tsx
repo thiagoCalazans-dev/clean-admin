@@ -1,10 +1,11 @@
 import { schema } from "@/client/lib/zod";
+import { formatNumbersToCnpjMask } from "../helpers/validators";
 
 export const SupplierSchema = schema.object({
   id: schema.string(),
   name: schema.string().min(3),
   corporateName: schema.string().min(3),
-  cnpj: schema.string().regex(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/),
+  cnpj: schema.string().transform((item) => formatNumbersToCnpjMask(item)),
   zipcode: schema.string().regex(/^\d{5}-?\d{3}$/),
   city: schema.string(),
   neighborhood: schema.string(),

@@ -2,6 +2,7 @@ import { CreateSupplierDTO } from "@/server/application/dto/supplier-dto";
 import { makeCreateSupplierUseCase } from "@/server/application/factories/makeCreateSupplierUseCase";
 import { makeGetSuppliersUseCase } from "@/server/application/factories/makeGetSuppliersUseCase";
 import { makeRemoveSuppliersUseCase } from "@/server/application/factories/makeRemoveSupplierUseCase";
+import { RequiredError } from "@/server/errors/RequiredError";
 
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
 import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
@@ -11,7 +12,7 @@ import { NextResponse } from "next/server";
 export class SupplierController {
   constructor() {}
   static async POST(request: Request) {
-    const {data} = await request.json();
+    const { data } = await request.json();
 
     const supplier: CreateSupplierDTO = {
       data: {
@@ -30,6 +31,12 @@ export class SupplierController {
       return NextResponse.json({ status: 201 });
     } catch (error) {
       if (error instanceof ResourceAlreadyExistError)
+        return NextResponse.json(null, {
+          status: error.status,
+          statusText: error.message,
+        });
+
+      if (error instanceof RequiredError)
         return NextResponse.json(null, {
           status: error.status,
           statusText: error.message,

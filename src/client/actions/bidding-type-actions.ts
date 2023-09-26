@@ -1,4 +1,5 @@
-import { BASE_URL } from "@/client/lib/utils";
+
+import { env } from "../helpers/env";
 import {
   CreateBiddingType,
   GetBiddingTypeActionOutput,
@@ -6,7 +7,7 @@ import {
 
 export class BiddingTypeActions {
   static async GET() {
-    const response = await fetch(`${BASE_URL}/biddingTypes`, {
+    const response = await fetch(`${env.API_BASE_URL}/biddingTypes`, {
       next: {
         tags: ["biddingTypes"],
       },
@@ -21,7 +22,7 @@ export class BiddingTypeActions {
   }
 
   static async REMOVE(biddingTypeId: string) {
-    const response = await fetch(`${BASE_URL}/biddingTypes/${biddingTypeId}`, {
+    const response = await fetch(`${env.API_BASE_URL}/biddingTypes/${biddingTypeId}`, {
       method: "DELETE",
     });
 
@@ -38,7 +39,7 @@ export class BiddingTypeActions {
       data: biddingType,
     };
 
-    const response = await fetch(`${BASE_URL}/biddingTypes`, {
+    const response = await fetch(`${env.API_BASE_URL}/biddingTypes`, {
       method: "POST",
       body: JSON.stringify(body),
     });

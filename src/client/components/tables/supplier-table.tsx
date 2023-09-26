@@ -7,7 +7,7 @@ import {
   TableBody,
   TableCell,
 } from "../ui/table";
-import { DeleteButton } from "../buttons/delete-supplier-button";
+import { DeleteSupplierButton } from "../buttons/delete-supplier-button";
 
 
 interface SupplierProps {
@@ -34,7 +34,7 @@ export function SupplierTable({ data }: SupplierProps) {
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{item.cnpj}</TableCell>
                 <TableCell className="flex justify-end items-center">
-                  <DeleteButton name={item.name} id={item.id} />
+                  <DeleteSupplierButton name={item.name} id={item.id} />
                 </TableCell>
               </TableRow>
             );

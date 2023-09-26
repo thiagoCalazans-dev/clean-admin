@@ -14,14 +14,14 @@ import {
   FormMessage,
 } from "@/client/components/ui/form";
 import {
-  Contract,
-  ContractSchema,
-  FormContract,
-  FormContractSchema,
-} from "@/client/schema/contract";
+  Amendment,
+  AmendmentSchema,
+  FormAmendment,
+  FormAmendmentSchema,
+} from "@/client/schema/amendment";
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
-import { ContractActions } from "@/client/actions/contract-actions";
+import { AmendmentActions } from "@/client/actions/amendment-actions";
 
 import { useRouter } from "next/navigation";
 import { Combobox } from "@/client/components/ui/combobox";
@@ -30,28 +30,22 @@ import { BiddingType } from "@/client/schema/bidding-type";
 import { normalizeDate } from "@/client/helpers/validators";
 import { useResponseValidationToast } from "@/client/hooks/use-response-validation-toast";
 
-interface ContractFormProps {
-  biddingTypes: BiddingType[];
-  suppliers: Supplier[];
+interface AmendmentFormProps {
+  contractId: string;
 }
 
-export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
+export function AmendmentForm({ contractId }: AmendmentFormProps) {
   const { onError, onSuccess } = useResponseValidationToast();
   const router = useRouter();
 
-  const form = useForm<Contract>({
-    resolver: zodResolver(FormContractSchema),
+  const form = useForm<FormAmendment>({
+    resolver: zodResolver(FormAmendmentSchema),
     defaultValues: {
-      value: "",
-      billingDeadline: "",
+      contractId: contractId,
+      value: 0,
       dueDate: "",
-      endContract: false,
-      fixture: "",
-      number: "",
-      processNumber: "",
+      number: 0,
       subscriptionDate: "",
-      supplierId: "",
-      biddingTypeId: "",
     },
   });
 
@@ -68,11 +62,10 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
 
   const { isSubmitting, errors } = form.formState;
 
-  async function onSubmit(formValues: Contract) {
+  async function onSubmit(formValues: FormAmendment) {
     try {
-      
-      await ContractActions.CREATE(formValues);
-      onSuccess("Contract created");
+      await AmendmentActions.CREATE(formValues);
+      onSuccess("Amendment created");
       form.reset();
       router.refresh();
     } catch (error: Error | any) {
@@ -83,7 +76,7 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
-        <div className="md:max-w-[768px]">
+        <div className="w-full py-2">
           <div className="grid md:grid-cols-2  gap-3">
             <FormField
               control={form.control}
@@ -102,16 +95,17 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
-              name="processNumber"
+              name="value"
               render={({ field }) => (
-                <FormItem className="">
-                  <FormLabel>Process Number</FormLabel>
+                <FormItem>
+                  <FormLabel>Value</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="1234"
+                      placeholder="00,00"
                       {...field}
                     />
                   </FormControl>
@@ -119,39 +113,7 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
                 </FormItem>
               )}
             />
-          </div>
-          <div className="grid md:grid-cols-2  gap-3">
-            <Combobox
-              data={suppliers}
-              form={form}
-              label="Supplier"
-              name="supplierId"
-            />
-            <Combobox
-              data={biddingTypes}
-              form={form}
-              label="Bidding type"
-              name="biddingTypeId"
-            />
-          </div>
-          <FormField
-            control={form.control}
-            name="value"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Value</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    placeholder="00,00"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid md:grid-cols-2  gap-3">
+
             <FormField
               control={form.control}
               name="subscriptionDate"
@@ -189,63 +151,14 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="billingDeadline"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Billing Deadline</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    {...field}
-                    placeholder="30 days"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="fixture"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Fixture</FormLabel>
-                <FormControl>
-                  <Textarea
-                    disabled={isSubmitting}
-                    placeholder="Lorem ipsum dolor sit amet. Sit ratione nemo et quam officiis et molestiae nihil ad facere omnis"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="endContract"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex items-center space-x-2 mt-2">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      // @ts-ignore
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel className="">End Contract</FormLabel>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <Button
+            disabled={isSubmitting}
+            className="ml-auto mt-2 w-full"
+            type="submit"
+          >
+            Save changes
+          </Button>
         </div>
-        <Button disabled={isSubmitting} className="ml-auto" type="submit">
-          Save changes
-        </Button>
       </form>
     </Form>
   );

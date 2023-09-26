@@ -1,11 +1,19 @@
-import { BASE_URL } from "@/client/lib/utils";
-import { CreateContract, GetContractsActionOutput } from "../schema/contract";
 
-export class ContractsActions {
+import { env } from "../helpers/env";
+import {
+  CreateContract,
+  GetContractsActionOutput,
+  GetContractsSchemaActionOutput,
+  fetchContractByIdParamsSchema,
+  fetchContractByIdReponse,
+  fetchContractByIdReponseSchema,
+} from "../schema/contract";
+
+export class ContractActions {
   static async GET() {
-    const response = await fetch(`${BASE_URL}/contracts`, {
+    const response = await fetch(`${env.API_BASE_URL}/contracts`, {
       next: {
-        tags: ["contractss"],
+        tags: ["contracts"],
       },
     });
 
@@ -14,11 +22,18 @@ export class ContractsActions {
     }
 
     const json: GetContractsActionOutput = await response.json();
-    return json;
+
+    const contracts = GetContractsSchemaActionOutput.safeParse(json);
+
+    if (!contracts.success) {
+      throw new Error(contracts.error.message);
+    }
+
+    return contracts.data;
   }
 
-  static async REMOVE(contractsId: string) {
-    const response = await fetch(`${BASE_URL}/contracts/${contractsId}`, {
+  static async REMOVE(contractId: string) {
+    const response = await fetch(`${env.API_BASE_URL}/contracts/${contractId}`, {
       method: "DELETE",
     });
 
@@ -30,14 +45,10 @@ export class ContractsActions {
     return json || null;
   }
 
-  static async CREATE(contracts: CreateContract) {
-    const body = {
-      data: {
-        contracts,
-      },
-    };
+  static async CREATE(contract: CreateContract) {
+    const body = { data: contract };
 
-    const response = await fetch(`${BASE_URL}/contracts`, {
+    const response = await fetch(`${env.API_BASE_URL}/contracts`, {
       method: "POST",
       body: JSON.stringify(body),
     });
@@ -48,5 +59,31 @@ export class ContractsActions {
 
     const result = await response.json();
     return result;
+  }
+
+  static async FETCH(contractId: string) {
+    const parsedParams = fetchContractByIdParamsSchema.safeParse(contractId);
+
+    if (!parsedParams.success) {
+      throw new Error(parsedParams.error.message);
+    }
+
+    const response = await fetch(`${env.API_BASE_URL}/contracts/${contractId}`, {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const json: fetchContractByIdReponse = await response.json();
+
+    const parsedReponse = fetchContractByIdReponseSchema.safeParse(json);
+
+    if (!parsedReponse.success) {
+      throw new Error(parsedReponse.error.message);
+    }
+
+    return parsedReponse.data;
   }
 }
