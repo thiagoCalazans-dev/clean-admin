@@ -5,13 +5,13 @@ import { AmendmentTable } from "@/client/components/tables/amendment.table";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
 
-export async function generateStaticParams() {
-  const contracts = await ContractActions.GET();
+// export async function generateStaticParams() {
+//   const contracts = await ContractActions.GET();
 
-  return contracts.data.map((item) => ({
-    contractId: item.id,
-  }));
-}
+//   return contracts.data.map((item) => ({
+//     contractId: item.id,
+//   }));
+// }
 
 export default async function Contract({
   params,
