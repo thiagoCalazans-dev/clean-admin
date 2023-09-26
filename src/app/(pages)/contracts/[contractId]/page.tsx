@@ -1,13 +1,17 @@
 import { ContractActions } from "@/client/actions/contract-actions";
-import { DeleteButton } from "@/client/components/buttons/delete-bidding-type-button";
 import { DeleteContractButton } from "@/client/components/buttons/delete-contract-button";
 import { CreateAmendmentModal } from "@/client/components/modals/create-amendment-modal";
 import { AmendmentTable } from "@/client/components/tables/amendment.table";
-import { Button } from "@/client/components/ui/button";
-import { Card } from "@/client/components/ui/card";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
-import { Textarea } from "@/client/components/ui/textarea";
+
+export async function generateStaticParams() {
+  const contracts = await ContractActions.GET();
+
+  return contracts.data.map((item) => ({
+    contractId: item.id,
+  }));
+}
 
 export default async function Contract({
   params,
@@ -81,7 +85,7 @@ export default async function Contract({
         <div className="flex-1 space-y-4 pb-4">
           <div className="flex items-center justify-between">
             <strong className="text-xl">Aditivos:</strong>
-            <CreateAmendmentModal contractId={data.id}/>
+            <CreateAmendmentModal contractId={data.id} />
           </div>
           <AmendmentTable data={data.amendment} />
         </div>
