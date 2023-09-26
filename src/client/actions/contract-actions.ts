@@ -28,7 +28,7 @@ export class ContractActions {
       throw new Error(contracts.error.message);
     }
 
-    return contracts.data;
+    return json;
   }
 
   static async REMOVE(contractId: string) {
