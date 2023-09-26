@@ -8,13 +8,12 @@ import {
 export class InMemoryBiddingTypeRepository implements BiddingTypeRepository {
   public biddingTypes: BiddingType[] = [];
 
-  async create(data: BiddingTypeCreate): Promise<BiddingType> {
+  async create(data: BiddingTypeCreate): Promise<void> {
     const biddingType: BiddingType = {
       id: randomUUID(),
       ...data,
     };
     this.biddingTypes.push(biddingType);
-    return biddingType;
   }
 
   async findMany() {
