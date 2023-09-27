@@ -3,9 +3,12 @@ import { CreateBiddingTypeModal } from "@/client/components/modals/create-biddin
 import { BiddingTypeTable } from "@/client/components/tables/bidding-type-table";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
+import { BiddingType } from "@/client/schema/bidding-type";
 
 export default async function BiddingTypes() {
-  const { data } = await BiddingTypeActions.GET();
+  // const { data } = await BiddingTypeActions.GET();
+
+  const data = [] as BiddingType[]
 
   return (
     <div className="flex-col">

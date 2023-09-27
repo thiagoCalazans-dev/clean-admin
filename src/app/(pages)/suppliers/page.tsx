@@ -4,9 +4,13 @@ import { SupplierTable } from "@/client/components/tables/supplier-table";
 
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
+import { Supplier } from "@/client/schema/supplier";
 
 export default async function Suppliers() {
-  const { data } = await SupplierActions.GET();
+  // const { data } = await SupplierActions.GET();
+
+  
+  const data = [] as Supplier[];
 
   return (
     <div className="flex-col">

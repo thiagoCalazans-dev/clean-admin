@@ -1,4 +1,3 @@
-
 import { env } from "../helpers/env";
 import {
   CreateBiddingType,
@@ -11,7 +10,6 @@ export class BiddingTypeActions {
       next: {
         tags: ["biddingTypes"],
       },
-      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -23,9 +21,12 @@ export class BiddingTypeActions {
   }
 
   static async REMOVE(biddingTypeId: string) {
-    const response = await fetch(`${env.API_BASE_URL}/biddingTypes/${biddingTypeId}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${env.API_BASE_URL}/biddingTypes/${biddingTypeId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) {
       throw new Error(response.statusText);

@@ -5,6 +5,13 @@ import { AmendmentTable } from "@/client/components/tables/amendment.table";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
 
+export async function generateStaticParams() {
+  const contracts = await ContractActions.GET();
+
+  return contracts.data.map((contract) => ({
+    contractId: contract.id,
+  }));
+}
 
 export default async function Contract({
   params,

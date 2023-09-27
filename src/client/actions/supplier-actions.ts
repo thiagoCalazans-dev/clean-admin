@@ -11,7 +11,6 @@ export class SupplierActions {
       next: {
         tags: ["suppliers"],
       },
-      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -22,7 +21,7 @@ export class SupplierActions {
 
     const supplier = GetSupplierSchemaActionOutput.safeParse(json);
 
-    if (!supplier.success) {
+    if (!supplier.success) { 
       throw new Error(supplier.error.message);
     }
 

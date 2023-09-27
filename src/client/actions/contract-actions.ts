@@ -14,7 +14,6 @@ export class ContractActions {
       next: {
         tags: ["contracts"],
       },
-      cache: "no-store",
     });
 
     if (!response.ok) {
