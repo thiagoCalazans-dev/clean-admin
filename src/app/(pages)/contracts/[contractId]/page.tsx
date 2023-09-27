@@ -4,6 +4,7 @@ import { CreateAmendmentModal } from "@/client/components/modals/create-amendmen
 import { AmendmentTable } from "@/client/components/tables/amendment.table";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
+import { Contract } from "@/client/schema/contract";
 
 export async function generateStaticParams() {
   const contracts = await ContractActions.GET();
@@ -18,7 +19,9 @@ export default async function Contract({
 }: {
   params: { contractId: string };
 }) {
-  const { data } = await ContractActions.FETCH(params.contractId);
+  // const { data } = await ContractActions.FETCH(params.contractId);
+
+  const data = {} as Contract
 
   return (
     <div className="flex-col">
