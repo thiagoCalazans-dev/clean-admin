@@ -28,7 +28,7 @@ export class ContractActions {
       throw new Error(contracts.error.message);
     }
 
-    return json;
+    return contracts.data;
   }
 
   static async REMOVE(contractId: string) {
@@ -70,9 +70,12 @@ export class ContractActions {
       throw new Error(parsedParams.error.message);
     }
 
-    const response = await fetch(`${env.API_BASE_URL}/contracts/${contractId}`, {
-      cache: "no-store"
-    });
+    const response = await fetch(
+      `${env.API_BASE_URL}/contracts/${contractId}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (!response.ok) {
       throw new Error(response.statusText);
