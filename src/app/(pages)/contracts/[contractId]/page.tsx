@@ -6,13 +6,13 @@ import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
 import { Contract } from "@/client/schema/contract";
 
-export async function generateStaticParams() {
-  const contracts = await ContractActions.GET();
+// export async function generateStaticParams() {
+//   const contracts = await ContractActions.GET();
 
-  return contracts.data.map((contract) => ({
-    contractId: contract.id,
-  }));
-}
+//   return contracts.data.map((contract) => ({
+//     contractId: contract.id,
+//   }));
+// }
 
 export default async function Contract({
   params,
@@ -21,7 +21,7 @@ export default async function Contract({
 }) {
   // const { data } = await ContractActions.FETCH(params.contractId);
 
-  const data = {} as Contract
+  const data = {} as Contract;
 
   return (
     <div className="flex-col">
