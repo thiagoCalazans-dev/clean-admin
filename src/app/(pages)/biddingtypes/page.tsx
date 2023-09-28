@@ -6,9 +6,7 @@ import { Separator } from "@/client/components/ui/separator";
 import { BiddingType } from "@/client/schema/bidding-type";
 
 export default async function BiddingTypes() {
-  // const { data } = await BiddingTypeActions.GET();
-
-  const data = [] as BiddingType[]
+  const { data } = await BiddingTypeActions.GET();
 
   return (
     <div className="flex-col">
