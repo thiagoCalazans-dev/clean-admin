@@ -11,17 +11,9 @@ import { Contract } from "@/client/schema/contract";
 import { Supplier } from "@/client/schema/supplier";
 
 export default async function Contracts() {
-  // const { data } = await ContractActions.GET();
-  // const { data: biddingTypes } = await BiddingTypeActions.GET();
-  //  const { data: suppliers } = await SupplierActions.GET();
-
-  
-  const biddingTypes = [] as BiddingType[];
-  const suppliers = [] as Supplier[];
-  const data = [] as Contract[];
-
-  
- 
+  const { data } = await ContractActions.GET();
+  const { data: biddingTypes } = await BiddingTypeActions.GET();
+  const { data: suppliers } = await SupplierActions.GET();
 
   return (
     <div className="flex-col">
