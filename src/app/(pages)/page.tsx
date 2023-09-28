@@ -1,3 +1,3 @@
 export default function Page () {
-    return <div>main</div>
+    return <div>FUTURO DASHBOARD</div>
 }
