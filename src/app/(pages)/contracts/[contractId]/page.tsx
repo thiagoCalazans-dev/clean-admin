@@ -19,9 +19,9 @@ export default async function Contract({
 }: {
   params: { contractId: string };
 }) {
-  // const { data } = await ContractActions.FETCH(params.contractId);
+  const { data } = await ContractActions.FETCH(params.contractId);
 
-  const data = {} as Contract;
+
 
   return (
     <div className="flex-col">
