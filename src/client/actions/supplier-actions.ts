@@ -7,7 +7,7 @@ import { env } from "../helpers/env";
 
 export class SupplierActions {
   static async GET() {
-    const response = await fetch(`${env.API_BASE_URL}suppliers`, {
+    const response = await fetch(`${env.API_BASE_URL}/api/suppliers`, {
       next: {
         tags: ["suppliers"],
       },
@@ -21,7 +21,7 @@ export class SupplierActions {
 
     const supplier = GetSupplierSchemaActionOutput.safeParse(json);
 
-    if (!supplier.success) { 
+    if (!supplier.success) {
       throw new Error(supplier.error.message);
     }
 
@@ -30,7 +30,7 @@ export class SupplierActions {
 
   static async REMOVE(supplierId: string) {
     const response = await fetch(
-      `${env.API_BASE_URL}suppliers/${supplierId}`,
+      `${env.API_BASE_URL}/api/suppliers/${supplierId}`,
       {
         method: "DELETE",
       }
@@ -49,7 +49,7 @@ export class SupplierActions {
       data: supplier,
     };
 
-    const response = await fetch(`${env.API_BASE_URL}suppliers`, {
+    const response = await fetch(`${env.API_BASE_URL}/api/suppliers`, {
       method: "POST",
       body: JSON.stringify(body),
     });

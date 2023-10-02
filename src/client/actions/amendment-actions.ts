@@ -3,7 +3,7 @@ import { CreateAmendment, CreateAmendmentParams } from "../schema/amendment";
 
 export class AmendmentActions {
   static async REMOVE(params: CreateAmendmentParams) {
-    const URL = `${env.API_BASE_URL}contracts/${params.contractId}/amendments/${params.amendmentId}`;
+    const URL = `${env.API_BASE_URL}/api/contracts/${params.contractId}/amendments/${params.amendmentId}`;
 
     const response = await fetch(URL, {
       method: "DELETE",
@@ -22,7 +22,7 @@ export class AmendmentActions {
       data: amendment,
     };
     const response = await fetch(
-      `${env.API_BASE_URL}contracts/${amendment.contractId}/amendments`,
+      `${env.API_BASE_URL}/api/contracts/${amendment.contractId}/amendments`,
       {
         method: "POST",
         body: JSON.stringify(body),
