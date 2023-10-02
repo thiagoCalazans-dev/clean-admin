@@ -7,6 +7,7 @@ import { AlertModal } from "@/client/components/modals/alert-modal";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useResponseValidationToast } from "../../hooks/use-response-validation-toast";
 import { BiddingTypeActions } from "../../actions/bidding-type-actions";
+import { env } from "@/client/helpers/env";
 
 interface DeleteButtonProps {
   id: string;
