@@ -22,7 +22,7 @@ export function DeleteSupplierButton({ name, id }: DeleteButtonProps) {
   const onDeleteConfirm = async () => {
     try {
       setLoading(true);
-      await await SupplierActions.REMOVE(id);
+      await SupplierActions.REMOVE(id);
       onSuccess(`${name} deleted!`);
       router.refresh();
     } catch (error: Error | any) {

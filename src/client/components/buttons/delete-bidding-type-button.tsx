@@ -19,10 +19,26 @@ export function DeleteButton({ name, id }: DeleteButtonProps) {
   const [loading, setLoading] = useState(false);
   const { onSuccess, onError } = useResponseValidationToast();
 
+  async function REMOVE(biddingTypeId: string) {
+    const response = await fetch(
+      `${env.API_BASE_URL}/biddingTypes/${biddingTypeId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const json = await response.json();
+    return json || null;
+  }
+
   const onDeleteConfirm = async () => {
     try {
       setLoading(true);
-      await await BiddingTypeActions.REMOVE(id);
+      await REMOVE(id);
       onSuccess(`${name} deleted!`);
       router.refresh();
     } catch (error: Error | any) {

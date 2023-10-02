@@ -8,7 +8,6 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import { useResponseValidationToast } from "../../hooks/use-response-validation-toast";
 import { ContractActions } from "../../actions/contract-actions";
 
-
 interface DeleteButtonProps {
   id: string;
   name: string;
@@ -23,7 +22,7 @@ export function DeleteContractButton({ name, id }: DeleteButtonProps) {
   const onDeleteConfirm = async () => {
     try {
       setLoading(true);
-      await await ContractActions.REMOVE(id);
+      await ContractActions.REMOVE(id);
       onSuccess(`${name} deleted!`);
       router.prefetch("/contracts");
     } catch (error: Error | any) {
