@@ -7,7 +7,7 @@ import { env } from "../helpers/env";
 
 export class SupplierActions {
   static async GET() {
-    const response = await fetch(`${env.API_BASE_URL}/suppliers`, {
+    const response = await fetch(`${env.API_BASE_URL}suppliers`, {
       next: {
         tags: ["suppliers"],
       },
@@ -30,7 +30,7 @@ export class SupplierActions {
 
   static async REMOVE(supplierId: string) {
     const response = await fetch(
-      `${env.API_BASE_URL}/suppliers/${supplierId}`,
+      `${env.API_BASE_URL}suppliers/${supplierId}`,
       {
         method: "DELETE",
       }
@@ -49,7 +49,7 @@ export class SupplierActions {
       data: supplier,
     };
 
-    const response = await fetch(`${env.API_BASE_URL}/suppliers`, {
+    const response = await fetch(`${env.API_BASE_URL}suppliers`, {
       method: "POST",
       body: JSON.stringify(body),
     });

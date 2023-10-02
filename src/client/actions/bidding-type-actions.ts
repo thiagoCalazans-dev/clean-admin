@@ -6,7 +6,7 @@ import {
 
 export class BiddingTypeActions {
   static async GET() {
-    const response = await fetch(`${env.API_BASE_URL}/biddingTypes`, {
+    const response = await fetch(`${env.API_BASE_URL}biddingTypes`, {
       next: {
         tags: ["biddingTypes"],
       },
@@ -23,7 +23,7 @@ export class BiddingTypeActions {
   static async REMOVE(biddingTypeId: string) {
 
     const response = await fetch(
-      `${env.API_BASE_URL}/biddingTypes/${biddingTypeId}`,
+      `${env.API_BASE_URL}biddingTypes/${biddingTypeId}`,
       {
         method: "DELETE",
       }
@@ -42,7 +42,11 @@ export class BiddingTypeActions {
       data: biddingType,
     };
 
-    const response = await fetch(`${env.API_BASE_URL}/biddingTypes`, {
+    const url = `${env.API_BASE_URL}biddingTypes`
+
+    console.log(url)
+
+    const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(body),
     });

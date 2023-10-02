@@ -10,7 +10,7 @@ import {
 
 export class ContractActions {
   static async GET() {
-    const response = await fetch(`${env.API_BASE_URL}/contracts`, {
+    const response = await fetch(`${env.API_BASE_URL}contracts`, {
       next: {
         tags: ["contracts"],
       },
@@ -33,7 +33,7 @@ export class ContractActions {
 
   static async REMOVE(contractId: string) {
     const response = await fetch(
-      `${env.API_BASE_URL}/contracts/${contractId}`,
+      `${env.API_BASE_URL}contracts/${contractId}`,
       {
         method: "DELETE",
       }
@@ -50,7 +50,7 @@ export class ContractActions {
   static async CREATE(contract: CreateContract) {
     const body = { data: contract };
 
-    const response = await fetch(`${env.API_BASE_URL}/contracts`, {
+    const response = await fetch(`${env.API_BASE_URL}contracts`, {
       method: "POST",
       body: JSON.stringify(body),
     });
@@ -71,7 +71,7 @@ export class ContractActions {
     }
 
     const response = await fetch(
-      `${env.API_BASE_URL}/contracts/${contractId}`,
+      `${env.API_BASE_URL}contracts/${contractId}`,
       {
         cache: "no-store",
       }
