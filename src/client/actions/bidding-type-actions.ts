@@ -21,6 +21,8 @@ export class BiddingTypeActions {
   }
 
   static async REMOVE(biddingTypeId: string) {
+    "use client";
+
     const response = await fetch(
       `${env.API_BASE_URL}/biddingTypes/${biddingTypeId}`,
       {
