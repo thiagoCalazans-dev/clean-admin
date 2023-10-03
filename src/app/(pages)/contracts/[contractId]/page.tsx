@@ -27,7 +27,7 @@ export default async function Contract({
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
         <div className="flex items-center justify-between">
-          <Heading title={`Contract: ${data.number}`} />
+          <Heading title={`Contrato: ${data.number}`} />
           <DeleteContractButton id={data.id} name="Contrato" />
         </div>
 

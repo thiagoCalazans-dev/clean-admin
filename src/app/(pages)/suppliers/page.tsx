@@ -14,8 +14,8 @@ export default async function Suppliers() {
         <>
           <div className="flex items-center justify-between">
             <Heading
-              title={`Suppliers (${data.length})`}
-              description="Manage your suppliers"
+              title={`Fornecedor (${data.length})`}
+              description="Cadastre seus fornecedores"
             />
             <CreateSupplierModal />
           </div>

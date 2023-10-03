@@ -21,8 +21,8 @@ export default async function Contracts() {
         <>
           <div className="flex items-center justify-between">
             <Heading
-              title={`Contracts (${data.length})`}
-              description="Manage your contractss"
+              title={`Contratos (${data.length})`}
+              description="Cadastre seus contratos"
             />
             <CreateContractModal
               suppliers={suppliers}

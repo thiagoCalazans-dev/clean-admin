@@ -14,8 +14,8 @@ export default async function BiddingTypes() {
         <>
           <div className="flex items-center justify-between">
             <Heading
-              title={`Biddings type (${data.length})`}
-              description="Manage your biddings type"
+              title={`Licitação (${data.length})`}
+              description="Cadastre seus tipos de licitações"
             />
             <CreateBiddingTypeModal />
           </div>
