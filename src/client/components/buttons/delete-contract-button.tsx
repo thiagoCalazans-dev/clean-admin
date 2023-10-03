@@ -25,6 +25,7 @@ export function DeleteContractButton({ name, id }: DeleteButtonProps) {
       await ContractActions.REMOVE(id);
       onSuccess(`${name} deleted!`);
       router.prefetch("/contracts");
+      router.push("/contracts");
     } catch (error: Error | any) {
       onError(error.message);
     } finally {
