@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/client/components/ui/dialog";
+import { DialogOverlay, DialogPortal } from "@radix-ui/react-dialog";
 
 interface ModalProps {
   title: string;
@@ -30,14 +31,17 @@ export const Modal: React.FC<ModalProps> = ({
   }
 
   return (
-    <Dialog  modal open={isOpen} onOpenChange={onChange}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
-        </DialogHeader>
-        <div>{children}</div>
-      </DialogContent>
+    <Dialog open={isOpen}>
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>{description}</DialogDescription>
+          </DialogHeader>
+          <div>{children}</div>
+        </DialogContent>
+      </DialogPortal>
     </Dialog>
   );
 };
