@@ -28,7 +28,7 @@ export class SupplierController {
 
       revalidateTag("suppliers");
 
-      return NextResponse.json({ status: 201 });
+      return NextResponse.json({ status: 201, Headers });
     } catch (error) {
       if (error instanceof ResourceAlreadyExistError)
         return NextResponse.json(null, {
