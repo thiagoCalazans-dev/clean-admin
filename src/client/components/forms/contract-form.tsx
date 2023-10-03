@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -70,7 +70,6 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
 
   async function onSubmit(formValues: Contract) {
     try {
-      
       await ContractActions.CREATE(formValues);
       onSuccess("Contract created");
       form.reset();
@@ -121,18 +120,22 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
             />
           </div>
           <div className="grid md:grid-cols-2  gap-3">
-            <Combobox
-              data={suppliers}
-              form={form}
-              label="Supplier"
-              name="supplierId"
-            />
-            <Combobox
-              data={biddingTypes}
-              form={form}
-              label="Bidding type"
-              name="biddingTypeId"
-            />
+            <Suspense fallback="carregando...">
+              <Combobox
+                data={suppliers}
+                form={form}
+                label="Supplier"
+                name="supplierId"
+              />
+            </Suspense>
+            <Suspense fallback="carregando...">
+              <Combobox
+                data={biddingTypes}
+                form={form}
+                label="Bidding type"
+                name="biddingTypeId"
+              />
+            </Suspense>
           </div>
           <FormField
             control={form.control}
