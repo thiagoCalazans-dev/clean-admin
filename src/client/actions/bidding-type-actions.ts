@@ -10,6 +10,7 @@ export class BiddingTypeActions {
       next: {
         tags: ["biddingTypes"],
       },
+      cache: "no-store",
     });
 
     if (!response.ok) {

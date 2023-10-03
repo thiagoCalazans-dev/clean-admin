@@ -11,6 +11,7 @@ export class SupplierActions {
       next: {
         tags: ["suppliers"],
       },
+      cache: "no-store",
     });
 
     if (!response.ok) {
