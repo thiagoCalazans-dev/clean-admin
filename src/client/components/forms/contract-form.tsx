@@ -81,8 +81,8 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
-        <div className="md:max-w-[768px]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 w-full">
+        <div className="md:max-w-[768px] flex flex-col gap-3">
           <div className="grid md:grid-cols-2  gap-3">
             <FormField
               control={form.control}

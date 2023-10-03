@@ -70,6 +70,7 @@ export function Combobox({ form, name, data, label }: clientComboboxProps) {
                 <CommandGroup>
                   {data.map((item) => (
                     <CommandItem
+                      className="cursor-pointer w-full "
                       value={item.name}
                       key={item.id}
                       onSelect={() => {
