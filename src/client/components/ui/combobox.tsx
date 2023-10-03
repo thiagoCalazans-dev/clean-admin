@@ -65,12 +65,12 @@ export function Combobox({ form, name, data, label }: clientComboboxProps) {
             </PopoverTrigger>
             <PopoverContent className="w-[23rem]   p-0" align="start">
               <Command>
-                <CommandInput placeholder="Search framework..." />
+                <CommandInput placeholder="Search..." />
                 <CommandEmpty>No resource found.</CommandEmpty>
                 <CommandGroup>
                   {data.map((item) => (
                     <CommandItem
-                      className="cursor-pointer w-full "
+                      className="cursor-pointer w-full z-50 "
                       value={item.name}
                       key={item.id}
                       onSelect={() => {
