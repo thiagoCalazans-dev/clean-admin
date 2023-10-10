@@ -45,6 +45,9 @@
     "typescript": "5.2.2",
     "zod": "^3.22.2"
   },
+  "overrides": {
+    "@radix-ui/react-dismissable-layer": "1.0.2"
+  },
   "devDependencies": {
     "bun-types": "^1.0.1"
   }
