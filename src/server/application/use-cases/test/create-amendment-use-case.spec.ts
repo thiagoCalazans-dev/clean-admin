@@ -5,7 +5,7 @@ import { InMemoryAmendmentRepository } from "../../repository/in-memory/amendmen
 import { CreateAmendmentUseCase } from "../create-amendment-use-case";
 import { Amendment } from "@/server/enterprise/entities/amendment";
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 import { InMemoryContractRepository } from "../../repository/in-memory/contract-in-memory-repository";
 
 let contractRepository: InMemoryContractRepository;
@@ -79,25 +79,25 @@ describe("Amendment use case", () => {
     const dto = { data: amendment };
 
     await expect(() => sut.execute(dto)).toThrow(
-      new ResourceNotfoundError("Contract")
+      new ResourceNotFoundError("Contract")
     );
   });
 
-    it("should not create a amendment with inexistent contractID", async () => {
-      const amendment: Amendment = {
-        number: 1,
-        contractId: contradId,
-        dueDate: new Date(),
-        subscriptionDate: new Date(),
-        value: 20,
-      };
+  it("should not create a amendment with inexistent contractID", async () => {
+    const amendment: Amendment = {
+      number: 1,
+      contractId: contradId,
+      dueDate: new Date(),
+      subscriptionDate: new Date(),
+      value: 20,
+    };
 
-      const dto = { data: amendment };
+    const dto = { data: amendment };
 
-       await sut.execute(dto);
+    await sut.execute(dto);
 
-      await expect(() => sut.execute(dto)).toThrow(
-        new ResourceAlreadyExistError("Amendment")
-      );
-    });
+    await expect(() => sut.execute(dto)).toThrow(
+      new ResourceAlreadyExistError("Amendment")
+    );
+  });
 });

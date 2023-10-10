@@ -21,6 +21,15 @@ model BiddingType {
    @@map("bidding_types")
 }
 
+model Module {
+  id              String          @id @default(uuid())
+  name            String          @unique
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+   @@map("modules")
+}
+
 model Supplier {
   id                String         @id @default(uuid())
   name              String

@@ -2,7 +2,7 @@ import { expect, it, describe, beforeEach } from "bun:test";
 import { BiddingTypeRepository } from "../../repository/bidding-type";
 import { InMemoryBiddingTypeRepository } from "../../repository/in-memory/bidding-type-in-memory-repository";
 import { RemoveBiddingTypesUseCase } from "../remove-bidding-type-use-case";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 let biddingTypeRepository: BiddingTypeRepository;
 let sut: RemoveBiddingTypesUseCase;
@@ -13,12 +13,16 @@ describe("create bidding type use case suit", () => {
     sut = new RemoveBiddingTypesUseCase(biddingTypeRepository);
   });
   it("should remove biddingType ", async () => {
-    const name = "John Doe";
+    const name = "nome";
     const createdData = await biddingTypeRepository.create({
       name,
     });
 
-    const deletedData = await sut.execute(createdData.id);
+    const data = await biddingTypeRepository.findByName("nome");
+
+
+
+    const deletedData = await sut.execute(data!.id);
 
     expect(deletedData).toBeUndefined();
   });
@@ -27,7 +31,7 @@ describe("create bidding type use case suit", () => {
     const id = "inexistentId";
 
     await expect(() => sut.execute(id)).toThrow(
-      new ResourceNotfoundError("Bidding type")
+      new ResourceNotFoundError("Bidding type")
     );
   });
 });

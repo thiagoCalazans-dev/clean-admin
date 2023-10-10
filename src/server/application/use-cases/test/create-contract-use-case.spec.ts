@@ -4,8 +4,7 @@ import { InMemorySupplierRepository } from "../../repository/in-memory/supplier-
 import { InMemoryContractRepository } from "../../repository/in-memory/contract-in-memory-repository";
 import { CreateContractUseCase } from "../create-contract-use-case";
 import { Contract } from "@/server/enterprise/entities/contract";
-import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 let biddingTypeRepository: InMemoryBiddingTypeRepository;
 let supplierRepository: InMemorySupplierRepository;
@@ -71,27 +70,27 @@ describe("Contract use case", () => {
     expect(data!.id).toEqual(expect.any(String));
   });
 
-   it("should not create a contract with inexistent supplierID", async () => {
-     const [biddingType] = await biddingTypeRepository.findMany();
-     const [supplier] = await supplierRepository.findMany();
+  it("should not create a contract with inexistent supplierID", async () => {
+    const [biddingType] = await biddingTypeRepository.findMany();
+    const [supplier] = await supplierRepository.findMany();
 
-     const contract: Contract = {
-       number: "0001/2023",
-       processNumber: "0001/2023",
-       biddingTypeId: biddingType.id,
-       supplierId: "string",
-       billingDeadline: "30 dias",
-       dueDate: new Date(),
-       endContract: false,
-       fixture: "Foo fixture",
-       subscriptionDate: new Date(),
-       value: 20,
-     };
+    const contract: Contract = {
+      number: "0001/2023",
+      processNumber: "0001/2023",
+      biddingTypeId: biddingType.id,
+      supplierId: "string",
+      billingDeadline: "30 dias",
+      dueDate: new Date(),
+      endContract: false,
+      fixture: "Foo fixture",
+      subscriptionDate: new Date(),
+      value: 20,
+    };
 
-    const dto = {data: contract}    
+    const dto = { data: contract };
 
     await expect(() => sut.execute(dto)).toThrow(
-      new ResourceNotfoundError("Supplier")
+      new ResourceNotFoundError("Supplier")
     );
-   });
+  });
 });

@@ -2,7 +2,7 @@ import { expect, it, describe, beforeEach } from "bun:test";
 import { ContractRepository } from "../../repository/contract";
 import { InMemoryContractRepository } from "../../repository/in-memory/contract-in-memory-repository";
 
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 import { RemoveContractUseCase } from "../remove-contract-use-case";
 
 let contractRepository: ContractRepository;
@@ -44,7 +44,7 @@ describe("create contract use case suit", () => {
     const id = "inexistentId";
 
     await expect(() => sut.execute(id)).toThrow(
-      new ResourceNotfoundError("Contract")
+      new ResourceNotFoundError("Contract")
     );
   });
 });

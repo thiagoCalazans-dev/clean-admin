@@ -2,7 +2,7 @@ import { expect, it, describe, beforeEach } from "bun:test";
 import { AmendmentRepository } from "../../repository/amendment";
 import { InMemoryAmendmentRepository } from "../../repository/in-memory/amendment-in-memory-repository";
 import { RemoveAmendmentsUseCase } from "../remove-amendment-use-case";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 let amendmentRepository: AmendmentRepository;
 let sut: RemoveAmendmentsUseCase;
@@ -36,7 +36,7 @@ describe("create bidding type use case suit", () => {
     const id = "inexistentId";
 
     await expect(() => sut.execute(id)).toThrow(
-      new ResourceNotfoundError("Amendment")
+      new ResourceNotFoundError("Amendment")
     );
   });
 });

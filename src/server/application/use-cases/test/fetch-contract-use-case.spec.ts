@@ -1,9 +1,8 @@
 import { expect, it, describe, beforeEach } from "bun:test";
 import { ContractRepository } from "../../repository/contract";
 import { InMemoryContractRepository } from "../../repository/in-memory/contract-in-memory-repository";
-import { RemoveContractUseCase } from "../remove-contract-use-case";
 import { FetchContractUseCase } from "../fetch-contract-use-case";
-import { ResourceNotfoundError } from "@/server/errors/ResourceNotFoundError";
+import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 
 let contractRepository: ContractRepository;
 let sut: FetchContractUseCase;
@@ -29,11 +28,12 @@ describe("create contract use case suit", () => {
 
     contractRepository.create(contract);
 
-    const createdData = await contractRepository.findBySupplierNumberAndProccess(
-      "string",
-      "0023/2023",
-      "0023/2023"
-    );
+    const createdData =
+      await contractRepository.findBySupplierNumberAndProccess(
+        "string",
+        "0023/2023",
+        "0023/2023"
+      );
 
     const fetchedContract = await sut.execute(createdData!.id);
 
@@ -44,7 +44,7 @@ describe("create contract use case suit", () => {
     const id = "inexistentId";
 
     await expect(() => sut.execute(id)).toThrow(
-      new ResourceNotfoundError("Contract")
+      new ResourceNotFoundError("Contract")
     );
   });
 });

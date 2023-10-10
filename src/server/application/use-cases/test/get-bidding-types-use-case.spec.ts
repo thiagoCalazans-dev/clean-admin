@@ -22,6 +22,8 @@ describe("get bidding types use case suit", () => {
 
     const allCreatedBiddingTypes = await sut.execute();
 
-    expect(allCreatedBiddingTypes).toHaveLength(2);
+
+
+    expect(allCreatedBiddingTypes.data).toHaveLength(2);
   });
 });
