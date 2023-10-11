@@ -15,9 +15,6 @@ export class PrismaContractRepository implements ContractRepository {
         biddingType: true,
         supplier: true,
       },
-      orderBy: {
-        dueDate: "asc",
-      },
     });
 
     const mappedContracts = contracts.map((contract) => {
@@ -42,12 +39,9 @@ export class PrismaContractRepository implements ContractRepository {
           zipcode: contract.supplier.zipcode,
         },
         billingDeadline: contract.billingDeadline,
-        dueDate: contract.dueDate,
         endContract: contract.endContract,
         fixture: contract.fixture,
         processNumber: contract.processNumber,
-        subscriptionDate: contract.subscriptionDate,
-        value: Number(contract.value),
       };
     });
 
@@ -93,12 +87,9 @@ export class PrismaContractRepository implements ContractRepository {
           zipcode: contract.supplier.zipcode,
         },
         billingDeadline: contract.billingDeadline,
-        dueDate: contract.dueDate,
         endContract: contract.endContract,
         fixture: contract.fixture,
         processNumber: contract.processNumber,
-        subscriptionDate: contract.subscriptionDate,
-        value: Number(contract.value),
       };
 
     return null;
@@ -149,12 +140,9 @@ export class PrismaContractRepository implements ContractRepository {
           zipcode: contract.supplier.zipcode,
         },
         billingDeadline: contract.billingDeadline,
-        dueDate: contract.dueDate,
         endContract: contract.endContract,
         fixture: contract.fixture,
         processNumber: contract.processNumber,
-        subscriptionDate: contract.subscriptionDate,
-        value: Number(contract.value),
         amendment: amendmentMapper,
       };
     }

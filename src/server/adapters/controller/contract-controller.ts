@@ -56,6 +56,8 @@ export class ContractController {
 
       const response = await contractUseCase.execute();
 
+      console.log(response)
+
       return NextResponse.json(response, { status: 200 });
     } catch (error) {
       console.error(error);

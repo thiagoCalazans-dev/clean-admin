@@ -18,6 +18,10 @@ const cadastros = [
     href: "/suppliers",
   },
   {
+    title: "Modulos",
+    href: "/modules",
+  },
+  {
     title: "Tipo de licitacão",
     href: "/biddingtypes",
   },

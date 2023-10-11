@@ -50,11 +50,8 @@ describe("Contract use case", () => {
       biddingTypeId: biddingType.id,
       supplierId: supplier.id,
       billingDeadline: "30 dias",
-      dueDate: new Date(),
       endContract: false,
       fixture: "Foo fixture",
-      subscriptionDate: new Date(),
-      value: 20,
     };
 
     await sut.execute({
@@ -80,11 +77,8 @@ describe("Contract use case", () => {
       biddingTypeId: biddingType.id,
       supplierId: "string",
       billingDeadline: "30 dias",
-      dueDate: new Date(),
       endContract: false,
       fixture: "Foo fixture",
-      subscriptionDate: new Date(),
-      value: 20,
     };
 
     const dto = { data: contract };

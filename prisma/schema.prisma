@@ -57,10 +57,7 @@ model Contract {
   biddingType       BiddingType     @relation(fields: [biddingTypeId], references: [id])
   supplierId        String
   supplier          Supplier        @relation(fields: [supplierId], references: [id])
-  value             Decimal
   fixture           String
-  dueDate           DateTime
-  subscriptionDate  DateTime
   billingDeadline   String
   endContract       Boolean  
   createdAt         DateTime        @default(now())

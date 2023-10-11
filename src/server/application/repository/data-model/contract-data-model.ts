@@ -10,10 +10,7 @@ export interface Contract {
   supplierId: string;
   biddingType?: BiddingType;
   supplier?: Supplier;
-  value: number;
   fixture: string;
-  dueDate: Date;
-  subscriptionDate: Date;
   billingDeadline: string;
   endContract: boolean;
   amendment?: Amendment[];
@@ -26,10 +23,7 @@ export interface ContractCreate {
   processNumber: string;
   biddingTypeId: string;
   supplierId: string;
-  value: number;
   fixture: string;
-  dueDate: Date;
-  subscriptionDate: Date;
   billingDeadline: string;
   endContract: boolean;
 }

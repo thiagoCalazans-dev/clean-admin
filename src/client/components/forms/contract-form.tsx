@@ -42,29 +42,15 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
   const form = useForm<Contract>({
     resolver: zodResolver(FormContractSchema),
     defaultValues: {
-      value: "",
       billingDeadline: "",
-      dueDate: "",
       endContract: false,
       fixture: "",
       number: "",
       processNumber: "",
-      subscriptionDate: "",
       supplierId: "",
       biddingTypeId: "",
     },
   });
-
-  // const dueDateValue = form.watch("dueDate");
-  // const subscriptionDateValue = form.watch("subscriptionDate");
-
-  //   useEffect(() => {
-  //     form.setValue("dueDate", normalizeDate(dueDateValue));
-  //   }, [dueDateValue, form]);
-
-  //   useEffect(() => {
-  //     form.setValue("subscriptionDate", normalizeDate(subscriptionDateValue));
-  //   }, [subscriptionDateValue, form]);
 
   const { isSubmitting, errors } = form.formState;
 
@@ -137,61 +123,7 @@ export function ContractForm({ biddingTypes, suppliers }: ContractFormProps) {
               />
             </Suspense>
           </div>
-          <FormField
-            control={form.control}
-            name="value"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Value</FormLabel>
-                <FormControl>
-                  <Input
-                    disabled={isSubmitting}
-                    placeholder="00,00"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid md:grid-cols-2  gap-3">
-            <FormField
-              control={form.control}
-              name="subscriptionDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Subscription Date</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      type="text"
-                      {...field}
-                      placeholder="01/01/2023"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="dueDate"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Due Date</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      type="text"
-                      placeholder="01/01/2023"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+
           <FormField
             control={form.control}
             name="billingDeadline"
