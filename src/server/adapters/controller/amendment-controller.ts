@@ -1,6 +1,7 @@
 import { CreateAmendmentDTO } from "@/server/application/dto/amendment-dto";
 import { makeCreateAmendmentUseCase } from "@/server/application/factories/makeCreateAmendmentUseCase";
 import { makeRemoveAmendmentsUseCase } from "@/server/application/factories/makeRemoveAmendmentUseCase";
+import { RequiredError } from "@/server/errors/RequiredError";
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
 import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 import { revalidateTag } from "next/cache";
@@ -10,6 +11,8 @@ export class AmendmentController {
   constructor() {}
   static async POST(request: Request) {
     const body: CreateAmendmentDTO = await request.json();
+
+    console.log("amendment_body", body);
 
     try {
       const amendmentUseCase = makeCreateAmendmentUseCase();
@@ -25,8 +28,13 @@ export class AmendmentController {
           status: error.status,
           statusText: error.message,
         });
+      if (error instanceof RequiredError)
+        return NextResponse.json(null, {
+          status: error.status,
+          statusText: error.message,
+        });
 
-      console.error(error);
+      console.error("amendmentoERROR", error);
       return NextResponse.json(null, {
         status: 500,
         statusText: "Something went wrong!",
@@ -51,8 +59,6 @@ export class AmendmentController {
         statusText: "Amendment removed",
       });
     } catch (error) {
-  
-
       console.error(error);
       return NextResponse.json(null, {
         status: 500,

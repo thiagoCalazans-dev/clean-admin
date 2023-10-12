@@ -3,6 +3,7 @@ import { RequiredError } from "../../errors/RequiredError";
 import { Currency } from "../value-object/currency";
 import { InvalidContractPeriodError } from "@/server/errors/InvalidContractPeriodError";
 import { InvalidSubscriptionDate } from "@/server/errors/InvalidSubscriptionDate";
+import { PositiveError } from "@/server/errors/PositiveError";
 
 export class Amendment {
   readonly id?: string;
@@ -34,7 +35,6 @@ export class Amendment {
   static create(amendment: Amendment) {
     const id = amendment.id ?? randomUUID();
 
-    if (!amendment.number) throw new RequiredError("number");
     if (!amendment.contractId) throw new RequiredError("contractId");
     if (!amendment.value) throw new RequiredError("value");
     if (!amendment.subscriptionDate)
@@ -42,6 +42,8 @@ export class Amendment {
     if (!amendment.dueDate) throw new RequiredError("dueDate");
 
     const value = Currency.validate(amendment.value).value;
+
+    if (amendment.number < 0) throw new PositiveError();
 
     if (amendment.dueDate < amendment.subscriptionDate) {
       throw new InvalidContractPeriodError();
