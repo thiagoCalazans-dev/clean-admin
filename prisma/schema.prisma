@@ -27,6 +27,8 @@ model Module {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 
+  amendmentModules AmendmentModule[]
+
    @@map("modules")
 }
 
@@ -82,8 +84,28 @@ model Amendment {
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 
+  amendmentModules AmendmentModule[]
+
   @@index([number, contractId], name: "unique_contract_amendment")
   @@index([contractId])
 
   @@map("amendments")
+}
+
+model AmendmentModule {
+  id                String          @id @default(uuid())
+  amendmentId String
+  amendment Amendment  @relation(fields: [amendmentId], references: [id])
+  moduleId String
+  module  Module @relation(fields: [moduleId], references: [id])
+  value             Decimal
+
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  @@index([moduleId, amendmentId], name: "unique_contract_amendment_modules")
+  @@index([amendmentId])
+  @@index([moduleId])
+
+  @@map("amendment_modules")
 }

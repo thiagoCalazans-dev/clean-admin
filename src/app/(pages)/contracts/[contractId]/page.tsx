@@ -6,22 +6,12 @@ import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
 import { Contract } from "@/client/schema/contract";
 
-// export async function generateStaticParams() {
-//   const contracts = await ContractActions.GET();
-
-//   return contracts.data.map((contract) => ({
-//     contractId: contract.id,
-//   }));
-// }
-
 export default async function Contract({
   params,
 }: {
   params: { contractId: string };
 }) {
   const { data } = await ContractActions.FETCH(params.contractId);
-
-
 
   return (
     <div className="flex-col">
@@ -45,20 +35,6 @@ export default async function Contract({
             <span className="text-muted-foreground">
               {data.biddingType.name}
             </span>
-          </li>
-          <li className="flex gap-2">
-            Data de assinatura:
-            <span className="text-muted-foreground">
-              {data.subscriptionDate}
-            </span>
-          </li>
-          <li className="flex gap-2">
-            Data de vencimento:
-            <span className="text-muted-foreground">{data.dueDate}</span>
-          </li>
-          <li className="flex gap-2">
-            Valor:
-            <span className="text-muted-foreground">{data.value}</span>
           </li>
           <li className="flex gap-2">
             Primeira Fatura:

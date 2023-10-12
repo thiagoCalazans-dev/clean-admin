@@ -1,3 +1,4 @@
+import { AmendmentModule } from "./amendment-module-data-model";
 import { Contract } from "./contract-data-model";
 
 export interface Amendment {
@@ -10,6 +11,8 @@ export interface Amendment {
   subscriptionDate: Date;
   createdAt?: Date;
   updatedAt?: Date;
+
+  amendmentModule?: AmendmentModule[];
 }
 
 export interface AmendmentCreate {

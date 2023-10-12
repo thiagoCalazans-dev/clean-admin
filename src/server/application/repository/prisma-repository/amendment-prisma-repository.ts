@@ -45,6 +45,10 @@ export class PrismaAmendmentRepository implements AmendmentRepository {
       where: {
         id,
       },
+      include: {
+        amendmentModules: true,
+        contract: true,
+      },
     });
 
     if (!response) return null;

@@ -9,6 +9,9 @@ import {
 
 import { Amendment, CreateAmendmentParams } from "@/client/schema/amendment";
 import { DeleteAmendmentButton } from "../buttons/delete-amendment-button";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 interface ContractProps {
   data: Amendment[] | undefined;
@@ -49,7 +52,12 @@ export function AmendmentTable({ data }: ContractProps) {
                 <TableCell>{item.value}</TableCell>
                 <TableCell>{item.subscriptionDate}</TableCell>
                 <TableCell>{item.dueDate}</TableCell>
-                <TableCell className="flex justify-end items-center">
+                <TableCell className="flex justify-end gap-3 items-center">
+                  <Button asChild>
+                    <Link href={`/contracts/${item.contractId}/${item.id}`}>
+                      <MagnifyingGlassIcon className="text-primary-foreground" />
+                    </Link>
+                  </Button>
                   <DeleteAmendmentButton name="Amendment" params={params} />
                 </TableCell>
               </TableRow>
