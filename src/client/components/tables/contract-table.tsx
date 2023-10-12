@@ -22,9 +22,9 @@ export function ContractTable({ data }: ContractProps) {
         <TableHeader>
           <TableRow>
             <TableHead>Fornecedor</TableHead>
+            <TableHead>Cliente</TableHead>
             <TableHead>Numero</TableHead>
-            <TableHead>Numero Processo</TableHead>
-            <TableHead>Vencimento</TableHead>
+            <TableHead>Processo</TableHead>
             <TableHead className="flex justify-end items-center">
               Action
             </TableHead>
@@ -35,9 +35,10 @@ export function ContractTable({ data }: ContractProps) {
             return (
               <TableRow key={item.id}>
                 <TableCell>{item.supplier.name}</TableCell>
+                <TableCell>{item.supplier.corporateName}</TableCell>
                 <TableCell>{item.number}</TableCell>
                 <TableCell>{item.processNumber}</TableCell>
-                <TableCell>{item.dueDate}</TableCell>
+
                 <TableCell className="flex justify-end items-center">
                   <Button asChild>
                     <Link href={`/contracts/${item.id}`}>
