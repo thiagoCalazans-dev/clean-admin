@@ -1,12 +1,13 @@
 import { expect, it, describe, beforeEach, beforeAll } from "bun:test";
 import { InMemoryBiddingTypeRepository } from "../../repository/in-memory/bidding-type-in-memory-repository";
 import { InMemorySupplierRepository } from "../../repository/in-memory/supplier-in-memory-repository";
-import { InMemoryAmendmentRepository } from "../../repository/in-memory/amendment-in-memory-repository";
+
 import { CreateAmendmentUseCase } from "../create-amendment-use-case";
 import { Amendment } from "@/server/enterprise/entities/amendment";
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
 import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 import { InMemoryContractRepository } from "../../repository/in-memory/contract-in-memory-repository";
+import { InMemoryAmendmentRepository } from "../../repository/in-memory/amendment-in-memory-repository";
 
 let contractRepository: InMemoryContractRepository;
 let amendmentRepository: InMemoryAmendmentRepository;

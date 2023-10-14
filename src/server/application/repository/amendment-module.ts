@@ -7,4 +7,8 @@ export interface AmendmentModuleRepository {
   create(data: AmendmentModuleCreate): Promise<void>;
   findById(id: string): Promise<AmendmentModule | null>;
   remove(id: string): Promise<void>;
+  findByAmendmentIdAndModuleId(
+    amendmentId: string,
+    moduleId: string
+  ): Promise<AmendmentModule | null>;
 }

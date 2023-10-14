@@ -17,6 +17,8 @@ interface ContractProps {
   data: Amendment[] | undefined;
 }
 
+
+
 export function AmendmentTable({ data }: ContractProps) {
   if (!data || data.length === 0)
     return (
@@ -24,6 +26,8 @@ export function AmendmentTable({ data }: ContractProps) {
         <span className="text-primary"> Ainda nao possui aditamentos</span>
       </div>
     );
+
+const status = ""
 
   return (
     <div className="rounded-md border">
@@ -51,7 +55,12 @@ export function AmendmentTable({ data }: ContractProps) {
                 <TableCell>{item.number}</TableCell>
                 <TableCell>{item.value}</TableCell>
                 <TableCell>{item.subscriptionDate}</TableCell>
-                <TableCell>{item.dueDate}</TableCell>
+                <TableCell
+                  data-status={status}
+                  className="data-[status=ALERT]:text-yellow-500 data-[status=DANGER]:text-red-500 text-primary"
+                >
+                  {item.dueDate}
+                </TableCell>
                 <TableCell className="flex justify-end gap-3 items-center">
                   <Button asChild>
                     <Link href={`/contracts/${item.contractId}/${item.id}`}>

@@ -5,7 +5,33 @@ import {
   AmendmentModuleCreate,
 } from "../data-model/amendment-module-data-model";
 
-export class PrismaAmendmentModuleModuleRepository implements AmendmentModuleRepository {
+export class PrismaAmendmentModuleRepository
+  implements AmendmentModuleRepository
+{
+  async findByAmendmentIdAndModuleId(
+    amendmentId: string,
+    moduleId: string
+  ): Promise<AmendmentModule | null> {
+    const response = await db.amendmentModule.findFirst({
+      where: {
+        amendmentId,
+        moduleId,
+      },
+    });
+
+    if (!response) return null;
+
+    const parsedValue = Number(response.value);
+
+    const amendmentModule = {
+      id: response.id,
+      amendmentId: response.amendmentId,
+      moduleId: response.moduleId,
+      value: parsedValue,
+    };
+
+    return amendmentModule;
+  }
   async create(data: AmendmentModuleCreate) {
     const parsedValue = data.value.toString();
 
@@ -17,7 +43,6 @@ export class PrismaAmendmentModuleModuleRepository implements AmendmentModuleRep
       },
     });
   }
-
 
   async findById(id: string): Promise<AmendmentModule | null> {
     const response = await db.amendmentModule.findUnique({

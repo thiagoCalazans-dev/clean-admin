@@ -38,7 +38,6 @@ export function ContractTable({ data }: ContractProps) {
                 <TableCell>{item.supplier.corporateName}</TableCell>
                 <TableCell>{item.number}</TableCell>
                 <TableCell>{item.processNumber}</TableCell>
-
                 <TableCell className="flex justify-end items-center">
                   <Button asChild>
                     <Link href={`/contracts/${item.id}`}>

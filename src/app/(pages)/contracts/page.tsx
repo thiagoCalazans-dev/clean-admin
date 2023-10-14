@@ -4,11 +4,8 @@ import { SupplierActions } from "@/client/actions/supplier-actions";
 import { CreateContractModal } from "@/client/components/modals/create-contract-modal";
 import { ContractTable } from "@/client/components/tables/contract-table";
 import { Heading } from "@/client/components/ui/heading";
-
 import { Separator } from "@/client/components/ui/separator";
-import { BiddingType } from "@/client/schema/bidding-type";
-import { Contract } from "@/client/schema/contract";
-import { Supplier } from "@/client/schema/supplier";
+
 
 export default async function Contracts() {
   const { data } = await ContractActions.GET();

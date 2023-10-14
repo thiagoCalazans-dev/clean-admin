@@ -7,7 +7,7 @@ import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
 let biddingTypeRepository: BiddingTypeRepository;
 let sut: RemoveBiddingTypesUseCase;
 
-describe("create bidding type use case suit", () => {
+describe("remove bidding type use case suit", () => {
   beforeEach(() => {
     biddingTypeRepository = new InMemoryBiddingTypeRepository();
     sut = new RemoveBiddingTypesUseCase(biddingTypeRepository);

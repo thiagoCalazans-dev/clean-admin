@@ -46,7 +46,11 @@ export class PrismaAmendmentRepository implements AmendmentRepository {
         id,
       },
       include: {
-        amendmentModules: true,
+        amendmentModules: {
+          include: {
+            module: true,
+          },
+        },
         contract: true,
       },
     });
@@ -55,13 +59,28 @@ export class PrismaAmendmentRepository implements AmendmentRepository {
 
     const parsedValue = Number(response.value);
 
+    const amendmentModulesMapper = response.amendmentModules.map((item) => {
+      return {
+        id: item.id,
+        amendmentId: item.amendmentId,
+        moduleId: item.moduleId,
+        module: {
+          id: item.module.id,
+          name: item.module.name,
+        },
+        value: Number(item.value),
+      };
+    });
+
     const amendment = {
       id: response.id,
       contractId: response.id,
+      contract: response.contract,
       dueDate: response.dueDate,
       number: response.number,
       subscriptionDate: response.dueDate,
       value: parsedValue,
+      amendmentModules: amendmentModulesMapper,
     };
 
     return amendment;

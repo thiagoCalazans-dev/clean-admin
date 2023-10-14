@@ -11,7 +11,7 @@ export interface Amendment {
   subscriptionDate: Date;
   createdAt?: Date;
   updatedAt?: Date;
-
+  
   amendmentModule?: AmendmentModule[];
 }
 

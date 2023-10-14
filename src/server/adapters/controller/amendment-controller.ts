@@ -1,5 +1,6 @@
 import { CreateAmendmentDTO } from "@/server/application/dto/amendment-dto";
 import { makeCreateAmendmentUseCase } from "@/server/application/factories/makeCreateAmendmentUseCase";
+import { makeFetchAmendmentsUseCase } from "@/server/application/factories/makeFetchAmendmentUseCase";
 import { makeRemoveAmendmentsUseCase } from "@/server/application/factories/makeRemoveAmendmentUseCase";
 import { RequiredError } from "@/server/errors/RequiredError";
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
@@ -35,6 +36,29 @@ export class AmendmentController {
         });
 
       console.error("amendmentoERROR", error);
+      return NextResponse.json(null, {
+        status: 500,
+        statusText: "Something went wrong!",
+      });
+    }
+  }
+
+  static async FETCH(
+    request: Request,
+    params: {
+      amendmentId: string;
+    }
+  ) {
+    const id = params.amendmentId;
+
+    try {
+      const amendmentUseCase = makeFetchAmendmentsUseCase();
+
+      const response = await amendmentUseCase.execute(id);
+
+      return NextResponse.json(response, { status: 200 });
+    } catch (error) {
+      console.error(error);
       return NextResponse.json(null, {
         status: 500,
         statusText: "Something went wrong!",

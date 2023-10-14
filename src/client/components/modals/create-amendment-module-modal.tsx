@@ -4,9 +4,19 @@ import { useEffect, useState } from "react";
 import { Modal } from "@/client/components/ui/modal";
 import { Button } from "@/client/components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
-import { ModuleForm } from "../forms/module-form";
+import { AmendmentModuleForm } from "../forms/amendment-module-form";
+import { Module } from "@/client/schema/module";
 
-export function CreateModuleModal() {
+interface AmendmentModuleModalProps {
+  modules: Module[];
+  params: {
+    contractId: string,
+    amendmentId: string,
+  }
+}
+
+
+export function CreateAmendmentModuleModal({modules, params}: AmendmentModuleModalProps) {
   const [modalState, setModalState] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -28,12 +38,12 @@ export function CreateModuleModal() {
         <PlusIcon className="mr-2 h-4 w-4" /> New
       </Button>
       <Modal
-        title="Módulo"
-        description="cadastre um novo módulo"
+        title="Contrato x Módulos"
+        description="vincule um módulo a seu contrato/aditivo"
         isOpen={modalState}
         onClose={closeModal}
       >
-        <ModuleForm />
+        <AmendmentModuleForm params={params} modules={modules} />
       </Modal>
     </>
   );

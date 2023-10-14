@@ -1,6 +1,6 @@
 import { AmendmentModule } from "@/server/enterprise/entities/amendment-module";
 
-export interface CreateAmendmentDTO {
+export interface CreateAmendmentModuleDTO {
   data: AmendmentModule;
 }
 

@@ -3,10 +3,21 @@ import {
   formatDateToBrazilianDateString,
 } from "../helpers/validators";
 import { schema } from "../lib/zod";
+import { AmendmentModuleSchema } from "./amendment-module";
+import { ContractSchema } from "./contract";
+import { SupplierSchema } from "./supplier";
 
 export const AmendmentSchema = schema.object({
   id: schema.string(),
   contractId: schema.string(),
+  contract: schema
+    .object({
+      id: schema.string(),
+      number: schema.string(),
+      processNumber: schema.string(),
+      supplier: SupplierSchema.optional(),
+    })
+    .optional(),
   number: schema.coerce.number(),
   dueDate: schema
     .string()
@@ -17,7 +28,9 @@ export const AmendmentSchema = schema.object({
   value: schema.coerce.number(),
   createdAt: schema.coerce.date().optional(),
   updatedAt: schema.coerce.date().optional(),
+  amendmentModules: AmendmentModuleSchema.array().optional(),
 });
+export type Amendment = schema.infer<typeof AmendmentSchema>;
 
 export const FormAmendmentSchema = schema.object({
   number: schema.coerce.number(),
@@ -40,8 +53,6 @@ export const FormAmendmentSchema = schema.object({
 });
 
 export type FormAmendment = schema.infer<typeof FormAmendmentSchema>;
-
-export type Amendment = schema.infer<typeof AmendmentSchema>;
 
 export const CreateAmendmentSchema = schema.object({
   number: schema.coerce.number(),
@@ -72,4 +83,20 @@ export const CreateAmendmentParamsSchema = schema.object({
 
 export type CreateAmendmentParams = schema.infer<
   typeof CreateAmendmentParamsSchema
+>;
+
+export const AmendmentByIdParamsSchema = schema.object({
+  contractId: schema.string(),
+  amendmentId: schema.string(),
+});
+
+export type AmendmentByIdParams = schema.infer<
+  typeof AmendmentByIdParamsSchema
+>;
+
+export const fetchAmendmentByIdReponseSchema = schema.object({
+  data: AmendmentSchema,
+});
+export type fetchAmendmentByIdReponse = schema.infer<
+  typeof fetchAmendmentByIdReponseSchema
 >;
