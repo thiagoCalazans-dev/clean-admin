@@ -1,16 +1,11 @@
 import { ModuleActions } from "@/client/actions/module-actions";
 import { CreateModuleModal } from "@/client/components/modals/create-module-modal";
 import { ModuleTable } from "@/client/components/tables/module-table";
-
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
-import { Module } from "@/client/schema/module";
 
 export default async function Modules() {
-  // const { data } = await ModuleActions.GET();
-
-  let data: Module[] = []
-  
+  const { data } = await ModuleActions.GET();
 
   return (
     <div className="flex-col">
