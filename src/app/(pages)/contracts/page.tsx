@@ -5,14 +5,14 @@ import { CreateContractModal } from "@/client/components/modals/create-contract-
 import { ContractTable } from "@/client/components/tables/contract-table";
 import { Heading } from "@/client/components/ui/heading";
 import { Separator } from "@/client/components/ui/separator";
-
+import { Contract } from "@/client/schema/contract";
 
 export default async function Contracts() {
-  const { data } = await ContractActions.GET();
+  // const { data } = await ContractActions.GET();
   const { data: biddingTypes } = await BiddingTypeActions.GET();
   const { data: suppliers } = await SupplierActions.GET();
 
-  if (!data) return <div>teste</div>; 
+  let data: Contract[] = [];
 
   return (
     <div className="flex-col">

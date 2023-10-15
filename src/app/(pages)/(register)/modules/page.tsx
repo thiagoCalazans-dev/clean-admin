@@ -7,9 +7,9 @@ import { Separator } from "@/client/components/ui/separator";
 import { Module } from "@/client/schema/module";
 
 export default async function Modules() {
-  const { data } = await ModuleActions.GET();
+  // const { data } = await ModuleActions.GET();
 
-  if (!data) return <div>teste</div> 
+  let data: Module[] = []
   
 
   return (
