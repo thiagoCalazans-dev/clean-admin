@@ -2,6 +2,7 @@ import { CreateAmendmentDTO } from "@/server/application/dto/amendment-dto";
 import { makeCreateAmendmentUseCase } from "@/server/application/factories/makeCreateAmendmentUseCase";
 import { makeFetchAmendmentsUseCase } from "@/server/application/factories/makeFetchAmendmentUseCase";
 import { makeRemoveAmendmentsUseCase } from "@/server/application/factories/makeRemoveAmendmentUseCase";
+import { InvalidContractPeriodError } from "@/server/errors/InvalidContractPeriodError";
 import { RequiredError } from "@/server/errors/RequiredError";
 import { ResourceAlreadyExistError } from "@/server/errors/ResourceAlreadyExistsError";
 import { ResourceNotFoundError } from "@/server/errors/ResourceNotFoundError";
@@ -30,6 +31,12 @@ export class AmendmentController {
           statusText: error.message,
         });
       if (error instanceof RequiredError)
+        return NextResponse.json(null, {
+          status: error.status,
+          statusText: error.message,
+        });
+
+      if (error instanceof InvalidContractPeriodError)
         return NextResponse.json(null, {
           status: error.status,
           statusText: error.message,

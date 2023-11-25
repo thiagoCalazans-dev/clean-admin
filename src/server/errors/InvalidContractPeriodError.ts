@@ -4,4 +4,6 @@ export class InvalidContractPeriodError extends Error {
       "Invalid contract period: Subscription date need to be before due date"
     );
   }
+
+  readonly status = 409;
 }
